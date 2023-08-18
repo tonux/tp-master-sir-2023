@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class CustomerRestControllerTest {
 
-    /*
+
     @Mock
     private CustomerService customerService;
 
@@ -77,7 +77,5 @@ class CustomerRestControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(updatedCustomer, response.getBody());
     }
-
-     */
 
 }

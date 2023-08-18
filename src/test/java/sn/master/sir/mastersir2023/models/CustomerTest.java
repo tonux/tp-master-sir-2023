@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTest {
 
-    /*
+
     @Test
     void testConstructorAndGetter() {
         Long id = 1L;
@@ -32,6 +32,4 @@ public class CustomerTest {
         assertEquals("jane@example.com", customer.getEmail());
         assertEquals("123-456-7890", customer.getPhone());
     }
-
-     */
 }

@@ -5,9 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import sn.master.sir.mastersir2023.models.Customer;
 import sn.master.sir.mastersir2023.repository.CustomerRepository;
 
@@ -76,6 +73,28 @@ class CustomerServiceTest {
     }
 
     // Add tests for deleteCustomer, updateCustomer, and getCustomerById
+    @Test
+    void testDeleteCustomer() {
+        Customer customer = new Customer(1L, "John");
+        customerService.deleteCustomer(customer.getId());
+        verify(customerRepository, times(1)).deleteById(customer.getId());
+    }
+
+    @Test
+    void testUpdateCustomer() {
+        Customer customer = new Customer(1L, "John");
+        customerService.updateCustomer(customer);
+        verify(customerRepository, times(1)).save(customer);
+    }
+
+    @Test
+    void getCustomerById(){
+        Customer customer = new Customer(1L, "John");
+        when(customerRepository.findById(customer.getId())).thenReturn(Optional.of(customer));
+        Customer foundCustomer = customerService.getCustomerById(customer.getId());
+        assertEquals(customer, foundCustomer);
+        verify(customerRepository, times(1)).findById(customer.getId());
+    }
 
 
 }

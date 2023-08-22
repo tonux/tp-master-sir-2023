@@ -13,16 +13,18 @@ pipeline {
             }
         }
         stage("Parallel Stages"){
-             stage('Maven version') {
-                        steps {
-                            sh "mvn --version"
-                        }
+             parallel{
+                stage('Maven version') {
+                                        steps {
+                                            sh "mvn --version"
+                                        }
+                             }
+                              stage("Build") {
+                                     steps {
+                                         sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
+                                     }
+                                }
              }
-              stage("Build") {
-                     steps {
-                         sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
-                     }
-                }
         }
         stage("SonarQube Analysis") {
             steps {

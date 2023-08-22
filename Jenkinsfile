@@ -35,11 +35,24 @@ pipeline {
         aborted {
             echo "Sending message to agent"
         }
-        failure {
-            echo "Sending message to agent"
-        }
         success {
-            echo "Sending message to agent"
-        }
+               emailext(
+                   subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                   body: "The build was successful. No further action is required.",
+                   recipientProviders: [culprits(), developers()],
+                   replyTo: "sambndongo@gmail.com",
+                   to: "sambndongo@gmail.com"
+               )
+           }
+           failure {
+               emailext(
+                   subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                   body: "The build has failed. Please investigate and take necessary action.",
+                   recipientProviders: [culprits(), developers()],
+                   replyTo: "sambndongo@gmail.com",
+                   to: "sambndongo@gmail.com"
+               )
+           }
+
     }
 }

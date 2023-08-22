@@ -9,8 +9,7 @@ pipeline {
   stages {
     stage("Source") {
       steps {
-        def selectedBranch = params.BRANCH ?: 'main'
-        git branch: selectedBranch, url: 'https://github.com/tonux/tp-master-sir-2023.git'
+        git branch: params.BRANCH, url: 'https://github.com/tonux/tp-master-sir-2023.git'
       }
     }
     stage("Parallel Stages") {

@@ -34,6 +34,22 @@ pipeline {
         sh 'mvn sonar:sonar -Dsonar.host.url=$SONAR_URL'
       }
     }
+
+    stage('Build Docker image') {
+          steps{
+                sh 'docker build -t ucadsir/tp-msir:latest .'
+          }
+    }
+    stage('Login to Docker Hub') {
+         steps{
+             sh 'docker login -u "ucadsir" -p "Ucadsir@2023"'
+         }
+    }
+    stage('Push to Docker Hub') {
+        steps{
+            sh 'docker push ucadsir/tp-msir:latest'
+        }
+    }
     stage('Approve Deployment') {
       input {
         message "Do you want to proceed for deployment?"

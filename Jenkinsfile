@@ -5,6 +5,7 @@ pipeline {
   }
   tools {
     maven 'Maven'
+    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
   }
   environment {
     SONAR_URL = "http://10.0.0.241:9000"

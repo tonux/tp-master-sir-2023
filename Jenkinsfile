@@ -4,8 +4,7 @@ pipeline {
     string(name: 'BRANCH', defaultValue: 'main', description:' anythings')
   }
   tools {
-    maven 'Maven',
-    docker 'docker'
+    maven 'Maven'
   }
   environment {
     SONAR_URL = "http://10.0.0.241:9000"
